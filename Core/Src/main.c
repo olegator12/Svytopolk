@@ -103,8 +103,10 @@ int main(void)
 
 
   //Приведение в стартовую позицию
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
-  start_pos(1);
+//  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+
+//  start_pos(3);
+
 
 
   robot.demo.constructor = &constrction_program;

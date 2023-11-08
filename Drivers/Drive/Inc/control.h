@@ -17,8 +17,8 @@ typedef struct{
 	int16_t captured_value[8];
 	int16_t rc_data[7];
 	uint8_t pointer;
-	uint16_t servo_value;
-	uint16_t previous_servo_value;
+	uint16_t servo_value[6];
+	uint16_t previous_servo_value[6];
 	float smoothing_factor;
 	float speed;
 	Program demo;

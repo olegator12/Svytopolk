@@ -80,7 +80,7 @@ void start_pos(uint8_t channel)
 	for(uint16_t i = 1350; i > 200; i--)
 	{
 	  set_pos(channel, i);
-	  HAL_Delay(10);
+	  HAL_Delay(20);
 	}
 }
 
@@ -119,7 +119,7 @@ void control_pos_from_wheel(uint8_t channel, int16_t slider_value)
 {
 	uint16_t servo_value = min_value_servo + (slider_value - min_value_controller) * (max_value_servo - min_value_servo) / (max_value_controller - min_value_controller);
 
-	HAL_Delay(20);
+	HAL_Delay(10);
 
 	set_pos(channel, servo_value);
 }
@@ -131,19 +131,19 @@ void control_pos_from_stick(uint8_t channel, int16_t stick_value)
 	if (stick_value > 20 || stick_value < -20) {
 		float target_value = ((float)stick_value - min_value_controller) * (max_value_servo - min_value_servo) / (max_value_controller - min_value_controller);
 
-		robot.servo_value = robot.previous_servo_value + robot.smoothing_factor * (target_value - robot.previous_servo_value);
+		robot.servo_value[channel - 1] = robot.previous_servo_value[channel - 1] + robot.smoothing_factor * (target_value - robot.previous_servo_value[channel - 1]);
 
-		if (robot.servo_value > 1300)
-			robot.servo_value = 1300;
-		else if (robot.servo_value < 200)
-			robot.servo_value = 200;
+		if (robot.servo_value[channel - 1] > 1300)
+			robot.servo_value[channel - 1] = 1300;
+		else if (robot.servo_value[channel - 1] < 200)
+			robot.servo_value[channel - 1] = 200;
 
-		robot.previous_servo_value = robot.servo_value;
+		robot.previous_servo_value[channel - 1] = robot.servo_value[channel - 1];
 	}
 
 	HAL_Delay(100);
 
-	set_pos(channel, robot.servo_value);
+	set_pos(channel, robot.servo_value[channel - 1]);
 
 }
 
