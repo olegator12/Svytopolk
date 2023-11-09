@@ -146,26 +146,27 @@ void destrction_program(void)
 
 void runner_program_1(void)
 {
-	control_drivers(1, robot.captured_value[2]); //управление левой стороной
-	control_drivers(2, robot.captured_value[1]); //управление правой стороной
-	control_drivers(3, robot.captured_value[5]); //управление откидной частью
+	control_drivers(1, robot.captured_value[left_stick_v]); //управление левой стороной
+	control_drivers(2, robot.captured_value[right_stick_v]); //управление правой стороной
+	control_drivers(3, robot.captured_value[right_wheel]); //управление откидной частью
 
-	control_pos_from_wheel(6, robot.captured_value[4]); //управление камерой
+	control_pos_from_wheel(6, robot.captured_value[left_wheel]); //управление камерой
 
-	if(robot.captured_value[7] != 500)
+	if(robot.captured_value[far_left_toggle_switch] != 500)
 		robot.isChanged = true;
 }
 
 
 void runner_program_2(void)
 {
-	control_pos_from_stick(1, robot.captured_value[0]);
+	control_pos_from_stick(1, robot.captured_value[left_stick_h]);
 	HAL_Delay(10);
-	control_pos_from_stick(2, robot.captured_value[3]);
+	control_pos_from_stick(2, robot.captured_value[right_stick_h]);
 	HAL_Delay(10);
+	control_pos_from_wheel(3, robot.captured_value[left_wheel]);
 
 
-	if(robot.captured_value[7] != 0)
+	if(robot.captured_value[far_left_toggle_switch] != 0)
 		robot.isChanged = true;
 }
 
@@ -174,6 +175,6 @@ void runner_program_3(void)
 {
 
 
-	if(robot.captured_value[7] != -500)
+	if(robot.captured_value[far_left_toggle_switch] != -500)
 		robot.isChanged = true;
 }

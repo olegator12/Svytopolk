@@ -24,8 +24,20 @@ typedef struct{
 	Program demo;
 }Svytopolk;
 
+enum GamePad{
+	left_stick_h,
+	right_stick_v,
+	left_stick_v,
+	right_stick_h,
+	left_wheel,
+	right_wheel,
+	far_left_toggle_switch,
+	near_left_toggle_switch
+};
+
 extern Program demo;
 extern Svytopolk robot;
+
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim);
 
